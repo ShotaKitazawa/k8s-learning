@@ -1,0 +1,16 @@
+[Unit]
+Description=kube-proxy
+Documentation=http://kubernetes.io/docs/
+
+[Service]
+EnvironmentFile=/etc/kubernetes/kube-proxy.conf
+ExecStart=/usr/local/bin/kube-proxy $KUBE_OPTS
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+StartLimitInterval=0
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+

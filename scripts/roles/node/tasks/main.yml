@@ -1,0 +1,41 @@
+---
+
+- name: "node.tasks.main: Download binaries"
+  unarchive:
+    src: "https://storage.googleapis.com/kubernetes-release/release/{{ kubernetes_version }}/kubernetes-server-linux-amd64.tar.gz"
+    remote_src: yes
+    dest: /tmp/
+
+- name: "node.tasks.main: Install binaries"
+  copy:
+    src: "{{ item }}"
+    remote_src: yes
+    dest: /usr/local/bin/
+    mode: 0755
+  with_items:
+    - "/tmp/kubernetes/server/bin/kubectl"
+    - "/tmp/kubernetes/server/bin/kubelet"
+    - "/tmp/kubernetes/server/bin/kube-proxy"
+
+- name: "node.tasks.main: Create directory"
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /etc/kubernetes
+    - /root/.kube
+
+- name: "node.tasks.main : Deploy files"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dst }}"
+  with_items:
+    - src: kubelet.service
+      dst: /usr/local/lib/systemd/system/
+    - src: kube-proxy.service
+      dst: /usr/local/lib/systemd/system/
+    - src: kubelet.conf
+      dst: /etc/kubernetes/
+    - src: kube-proxy.conf
+      dst: /etc/kubernetes/
+

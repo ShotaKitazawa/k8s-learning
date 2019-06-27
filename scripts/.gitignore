@@ -1,0 +1,5 @@
+ansible.log
+*.retry
+
+inventory
+.state

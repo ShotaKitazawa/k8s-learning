@@ -1,0 +1,16 @@
+[Unit]
+Description=kube-controller-manager
+Documentation=http://kubernetes.io/docs/
+
+[Service]
+EnvironmentFile=/etc/kubernetes/kube-controller-manager.conf
+ExecStart=/usr/local/bin/kube-controller-manager $KUBE_OPTS
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+StartLimitInterval=0
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+

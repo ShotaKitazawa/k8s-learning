@@ -1,0 +1,19 @@
+---
+
+- hosts: all
+  pre_tasks:
+    - name: ".: Set hostname"
+      hostname:
+        name: "{{ inventory_hostname }}"
+      register: set_hostname
+    - name: ".: Re-gather facts"
+      action: setup
+      when: set_hostname is changed
+
+- hosts: master
+  roles:
+    - master
+
+- hosts: node
+  roles:
+    - node
