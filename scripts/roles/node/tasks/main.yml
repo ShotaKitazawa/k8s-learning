@@ -6,6 +6,16 @@
     remote_src: yes
     dest: /tmp/
 
+
+- name: "node.tasks.main: Download flannel binaries"
+  get_url:
+    url: "{{ item }}"
+    dest: /usr/local/bin/flanneld
+    mode: 0755
+  with_items:
+    - "https://github.com/coreos/flannel/releases/download/{{ flannel_version }}/flanneld-amd64"
+
+
 - name: "node.tasks.main: Install binaries"
   copy:
     src: "{{ item }}"
@@ -24,6 +34,7 @@
   with_items:
     - /etc/kubernetes
     - /root/.kube
+    - /etc/flannel
 
 - name: "node.tasks.main : Deploy files"
   template:
@@ -38,4 +49,8 @@
       dst: /etc/kubernetes/
     - src: kube-proxy.conf
       dst: /etc/kubernetes/
+    - src: flanneld.service
+      dst: /usr/local/lib/systemd/system/
+    - src: flanneld.conf
+      dst: /etc/flannel/
 
