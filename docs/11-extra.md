@@ -1,7 +1,9 @@
 # 時間が余ったら
 
 * Secure Cluster (secure-port, secure-bind-address)
-    * https化 & 認証の有効化
+    * kube-apiserverへの通信をhttps化 & 認証の有効化
+        * Pod から kube-apiserver への通信もhttpsを使用しなければいけない
+            * ServiceAccount に結びついたsecretに ca.srt を埋め込んでPodに渡す
 * RBAC, ABAC
     * 認可の有効化
 * Flannel の設定の違い

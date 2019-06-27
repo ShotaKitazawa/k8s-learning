@@ -35,12 +35,3 @@ gcloud compute ssh $INSTANCE_NAME
 ```
 sudo su -
 ```
-
-* 各インスタンスへホスト名で通信できるよう `/etc/hosts` を修正しておいてください。
-    * 以下は例
-
-```
-10.1.0.2 kube01
-10.1.0.3 kube02
-10.1.0.4 kube03
-```
