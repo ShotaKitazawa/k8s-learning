@@ -6,3 +6,7 @@
     * 例えば、`ss -naptl | grep etcd` などを実行して etcd が 127.0.0.1 や`ss -naptl | grep etcd` などを実行して kube-apiserver などが 127.0.0.1 になっている場合、外からのアクセスができなくなっています。
     * 外からのアクセスが出来るように /etc/default/etcd や /etc/default/kube-apiserver などの設定を 0.0.0.0 などに変えてみて下さい。
 
+* 動作確認
+    * 以下のマニフェストをapplyしてPodが動作することを確認
+        * 当リポジトリ manifests/06-manifest.yaml を参照
+        * 全nodeにPodが配置されるようになった

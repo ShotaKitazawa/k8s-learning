@@ -1,10 +1,9 @@
 # kube-dns Pod を起動する
 
-* https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/dns/kube-dns
-    * 追加で、kube-dns の引数に `--kube-master-url=http://$ADDR:8080` を指定する
-        * これがないとkube-dnsはkube-apiserverへhttpsで接続しに行こうとしてしまうためコケる
-    * kube-dns service の clusterIPには、kubeletで設定した値を入れる
-        * 他Podはkubeletに設定された値を見て DNS のアドレスを把握するため
+* 当リポジトリ manifests/10-manifests.yaml を参照 (参考: https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/dns/kube-dns)
+    * kube-master-urlの行を適宜クラスタのapiserverのURLに置き換え
+    * `10.0.0.254` を、kubeletの cluster-dns で指定しているIPに置き換え
+    * `cluster.local` を、kubeletの --cluster-domain で 指定しているドメインに置き換え
 
 * kubelet の設定を変更
     * pod の向くDNSをkube-dnsのアドレスにする

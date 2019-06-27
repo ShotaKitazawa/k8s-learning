@@ -8,28 +8,5 @@
 * 動作確認
     * `systemctl status kube-controller-manager` を複数回実行して、正常に起動していることを確認
     * 以下のマニフェストをapplyしてPodが動作することを確認
+        * 当リポジトリ manifests/06-manifest.yaml を参照
         * Deployment Resource 等が使えるようになった
-```
----
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: hello-world
-  labels:
-    app: hello-world
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: hello-world
-  template:
-    metadata:
-      labels:
-        app: hello-world
-    spec:
-      containers:
-      - image: zembutsu/docker-sample-nginx:latest
-        name: hello-world
-        ports:
-        - containerPort: 80
-```

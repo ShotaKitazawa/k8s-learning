@@ -6,41 +6,9 @@
 
 * 動作確認
     * systemctl status kube-scheduler を複数回実行して、正常に起動していることを確認
-    * 以下のマニフェストをapplyしてPodが動作することを確認
+    * マニフェストをapplyしてPodが動作することを確認
+        * 当リポジトリ manifests/05-manifest.yaml を参照
         * pod.spec.nodeName が要らなくなった
-
-```
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: test
-  namespace: default
-  selfLink: /api/v1/namespaces/default/serviceaccounts/test
-  uid: 721ab723-13bc-11e5-aec2-42010af0021e
-secrets:
-- name: test-secret
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: test-secret
-  annotations:
-    kubernetes.io/service-account.name: test
-type: kubernetes.io/service-account-token
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: hello-world
-spec:
-  serviceAccountName: test
-  containers:
-  - image: zembutsu/docker-sample-nginx:latest
-    name: hello-world
-    ports:
-    - containerPort: 80
-```
 
 * MEMO: もしかしたら以下のコマンドが必要 (TODO: 原因究明)
 ```

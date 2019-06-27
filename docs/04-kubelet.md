@@ -24,41 +24,8 @@ KUBE_OPTS=" \
 
 * 動作確認
     * この時点で、SA, Secret を手動作成の上でpod.spec.nodeNameに `$NODE_ADDRESS` を記述すれば、Podが配置されることを確認
+        * 当リポジトリ manifests/04-manifest.yaml を参照
         * kube-controller-manager が居ないため、default ServiceAccount すら存在しない > 手動で SA, SAに紐づくsecret を作る必要がある
-
-```
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: test
-  namespace: default
-  selfLink: /api/v1/namespaces/default/serviceaccounts/test
-  uid: 721ab723-13bc-11e5-aec2-42010af0021e
-secrets:
-- name: test-secret
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: test-secret
-  annotations:
-    kubernetes.io/service-account.name: test
-type: kubernetes.io/service-account-token
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: hello-world
-spec:
-  nodeName: k8s-learning-kanata-01
-  serviceAccountName: test
-  containers:
-  - image: zembutsu/docker-sample-nginx:latest
-    name: hello-world
-    ports:
-    - containerPort: 80
-```
 
 * MEMO: Podの強制削除
 ```

@@ -8,44 +8,7 @@
 * 動作確認
     * `systemctl status kube-proxy` を複数回実行して、正常に起動していることを確認
     * 以下のマニフェストをapplyして、外部からPodへ通信できることを確認
-```
----
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: hello-world
-  labels:
-    app: hello-world
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: hello-world
-  template:
-    metadata:
-      labels:
-        app: hello-world
-    spec:
-      containers:
-      - image: zembutsu/docker-sample-nginx:latest
-        name: hello-world
-        ports:
-        - containerPort: 80
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: hello-world
-spec:
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 80
-    nodePort: 30080
-  selector:
-    app: hello-world
-  type: NodePort
-```
+        * 当リポジトリ manifests/08-manifest.yaml を参照
 
 * 疎通の確認
     * NodePort への通信は、指定したnodeにあるPodにしか着弾しないことに注意

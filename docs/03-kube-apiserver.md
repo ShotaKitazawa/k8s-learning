@@ -36,36 +36,3 @@ KUBE_OPTS=" \
     * v1.10より、推奨機能はデフォルトで有効化されています。
         * https://kubernetes.io/docs/admin/admission-controllers/#is-there-a-recommended-set-of-admission-controllers-to-use
 
-
-<!--
-* `--service_account_key_file` には秘密鍵または公開鍵を入れる必要がある
-    * openssl コマンドなどで適当に作る
-    * 以下コマンドで設定ができているかの確認
-```
-# ServiceAccountの作成
-$ kubectl create sa hogefuga
-```
-
-```
-# ServiceAccountに紐付けられたsecretを確認
-$ kubectl describe sa hogefuga
-```
-
-```
-# secret の内容を確認 (SA key がないとsecretは自動生成されない)
-$ kubectl describe secrets default-token-525ww
-Name:         default-token-525ww
-Namespace:    lab2charlie-app-monitoring
-Labels:       <none>
-Annotations:  kubernetes.io/service-account.name: default
-              kubernetes.io/service-account.uid: fe14efc4-93ff-11e9-a054-42010a92003b
-
-Type:  kubernetes.io/service-account-token
-
-Data
-====
-ca.crt:     1119 bytes
-namespace:  26 bytes
-token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ......
-```
--->
