@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+#set -xe
 
 cd $(dirname $0)
 
@@ -14,13 +14,15 @@ IMAGE_FAMILY=ubuntu-1804-lts
 IMAGE_PROJECT=ubuntu-os-cloud
 
 PROJECT=$(gcloud config list 2>&1 | grep project | cut -d" " -f3)
-echo "current_project is $PROJECT: ok? [y/n]: "; read check
-if [ "$check" != "y" ]; then exit 1; fi
+echo -n "current_project is $PROJECT: ok? [y/n]: "; read check
+if [ "$check" != "y" ]; then
+  echo 'please set other project > `gcloud config set project $PROJECT`'
+  exit 1
+fi
 
 if [ "$ARG" = "create" ]; then
   if [ "$NAMES" = "" ]; then echo "NAMES is undefined"; exit 1; fi
   if [ ! -e .state ]; then echo "$NAMES" > .state; else echo ".state exists"; exit 1; fi
-  gcloud config set project $PROJECT
   gcloud compute networks create $NETWORK --subnet-mode custom
   gcloud compute firewall-rules create $NETWORK --network=$NETWORK --rules tcp:22 --action allow
   cnt=0
@@ -35,7 +37,6 @@ if [ "$ARG" = "create" ]; then
   done
 elif [ "$ARG" = "delete" ]; then
   if [ -e .state ]; then NAMES="$(cat .state)"; else echo ".state dont exist"; exit 1; fi
-  gcloud config set project $PROJECT
   for name in $NAMES; do
     gcloud compute instances delete $INSTANCE-$name-01 -q
     gcloud compute instances delete $INSTANCE-$name-02 -q
