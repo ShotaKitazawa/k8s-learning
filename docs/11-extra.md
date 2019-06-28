@@ -10,6 +10,7 @@
     * etcd cluster & ha-proxy & keepalived だけ
 * 認可の有効化
     * RBAC, ABAC
+* HorizontalPodAutoscaling の有効化
 * Flannel の設定の違い
     * hostgw / vxlan
 * Flannel 以外のNetworkプラグイン
@@ -19,11 +20,11 @@
 
 * coredns
     * kube-dns の代替
-* Helm
 * MetalLB
     * Service Resource の type LoadBalancer が使えるようになる
 * nginx-ingress
     * Ingress Resourceが使えるようになる
+* Helm
 * Istio ServiceMesh
 
 * 外部 Persistent Volume の有効化
