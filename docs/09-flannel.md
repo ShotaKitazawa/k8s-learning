@@ -23,7 +23,18 @@ KUBE_OPTS=" \
 * /etc/cni/net.d/ に、cniに食わせる flannel 用の設定を配置
     * https://github.com/containernetworking/plugins/tree/master/plugins/meta/flannel
 * etcd に flannel の持つネットワークの情報を登録
-    * https://coreos.com/flannel/docs/latest/kubernetes.html
+    * htotps://coreos.com/flannel/docs/latest/kubernetes.html
+```
+cat << '_EOF_' > /etc/cni/net.d/flannel.conf
+{
+    "name": "podnet",
+    "type": "flannel",
+    "delegate": {
+        "isDefaultGateway": true
+    }
+}
+_EOF_
+```
 
 * systemctl restart flanneld で設定反映（プロセス再起動）
 
