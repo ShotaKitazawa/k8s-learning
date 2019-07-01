@@ -2,7 +2,7 @@
 
 * 設定ファイルは /etc/kubernetes/kube-controller-manager.conf です。 systectl restart kube-controller-manager で設定反映（プロセス再起動）できます。
 
-* 設定ファイルにて、kube-scheduler のbind Address、kube-apiserverのurl指定、kubeconfigの指定、serviceaccountを作成するための秘密鍵の指定 が必要
+* 設定ファイルにて、kube-controller-manager のbind Address、kube-apiserverのurl指定、kubeconfigの指定、serviceaccountを作成するための秘密鍵の指定 が必要
     * 新しく秘密鍵を作成
 
 * 動作確認
