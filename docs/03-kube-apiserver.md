@@ -21,6 +21,8 @@ kubectl config use-context my-context
 * ログレベルの変更は -v 1 とか -v 5 とかで可能
 
 * 設定ファイルは以下みたいになるはず
+    * コマンドラインにて `kube-apiserver --help 2>&1 | less`
+    * ブラウザにて https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/
 
 ```
 KUBE_OPTS=" \
