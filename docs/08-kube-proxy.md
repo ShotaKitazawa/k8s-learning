@@ -1,6 +1,6 @@
 # 全台の kube-proxyを設定し、起動する
 
-* kube-proxy の設定ファイルはそれぞれ /etc/kubernetes/kube-proxy.conf と /etc/flannel/flanneld.conf
+* kube-proxy の設定ファイルはそれぞれ /etc/kubernetes/kube-proxy.conf
 	* systectl restart kube-proxyで設定反映（プロセス再起動）できます。
 
 * 設定ファイルにて、kube-proxyのbind Address、kube-apiserverのurl指定、kubeconfigの指定 で動くはず
