@@ -1,6 +1,7 @@
 # 1 号機の kube-apiserver を設定し、起動する。
 
-* 設定ファイルは /etc/kubernetes/kube-apiserver.conf に存在、 systectl restart kube-apiserver で設定反映（プロセス再起動）
+* 設定ファイルが /etc/kubernetes/kube-apiserver.conf に存在します。当ファイルにオプションを追記していき、kube-apiserverを起動してください。
+    * `systemctl restart kube-apiserver` で設定反映（プロセス再起動）
     * `systemctl status kube-apiserver` を複数回実行しエラーがないことを確認
 
 * kubectlの設定
