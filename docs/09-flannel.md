@@ -20,10 +20,10 @@ KUBE_OPTS=" \
 
 * /etc/flannel/flanneld.conf にて、kube-apiserverのurl指定、kubeconfigの指定、etcdのurl指定 で動くはず
     * MEMO: `-etcd-endpoints` の引数にホスト名を指定するとエラーするため IP Address を書く (原因不明)
+* etcd に flannel の持つネットワークの情報を登録
+    * https://coreos.com/flannel/docs/latest/configuration.html
 * /etc/cni/net.d/ に、cniに食わせる flannel 用の設定を配置
     * https://github.com/containernetworking/plugins/tree/master/plugins/meta/flannel
-* etcd に flannel の持つネットワークの情報を登録
-    * htotps://coreos.com/flannel/docs/latest/kubernetes.html
 ```
 cat << '_EOF_' > /etc/cni/net.d/flannel.conf
 {
