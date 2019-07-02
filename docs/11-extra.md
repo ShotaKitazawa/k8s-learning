@@ -6,6 +6,7 @@
             * 認証も同時に有効化しなければならない
         * Pod から kube-apiserver への通信もhttpsを使用
             * ServiceAccount に結びついたsecretに ca.srt を埋め込んでPodに渡す
+    * etcdへの通信のhttps化、データ暗号化
 * Multi Master 構成
     * etcd cluster & ha-proxy & keepalived だけ
 * 認可の有効化
