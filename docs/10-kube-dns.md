@@ -15,3 +15,6 @@
 * Ubuntu 18.04 の場合、以下のissueのような事があるので注意 (dnsmasq Pod のupstream DNSにホストのresolv.confに書かれた127.0.0.53を指定してしまいunreachableする)
     * https://github.com/kubernetes/kubernetes/issues/45828
 
+* 確認
+    * `kubectl exec` でPod内に入り、サービス名を指定した通信が出来ることを確認
+        * 例: `curl http://hello-world`

@@ -1,5 +1,6 @@
-
 # 全台の flannel を設定し、起動する
+
+## kubeletの設定
 
 * kubelet の設定に以下を追記
 
@@ -17,6 +18,10 @@ KUBE_OPTS=" \
         * https://github.com/containernetworking/plugins/releases
     * `cni` でなく `kubenet` も指定可能
         * 参考: https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/
+
+* systemctl restart kubelet で設定反映 (プロセス再起動)
+
+## flannelの設定
 
 * /etc/flannel/flanneld.conf にて、kube-apiserverのurl指定、kubeconfigの指定、etcdのurl指定 で動くはず
     * MEMO: `-etcd-endpoints` の引数にホスト名を指定するとエラーするため IP Address を書く (原因不明)
@@ -38,11 +43,11 @@ _EOF_
 
 * systemctl restart flanneld で設定反映（プロセス再起動）
 
+## flannelの確認
 
-* 動作確認
-    * `systemctl status flanneld` を複数回実行して、正常に起動していることを確認
-    * 以下のマニフェストをapplyして、外部からPodへ通信できることを確認
-        * 当リポジトリ manifests/08-manifest.yaml を参照
+* `systemctl status flanneld` を複数回実行して、正常に起動していることを確認
+* 以下のマニフェストをapplyして、外部からPodへ通信できることを確認
+    * 当リポジトリ manifests/08-manifest.yaml を参照
 
 * 疎通の確認: Service から各node上のPodに通信が振り分けられる
     * Pod の数だけ出力が出ることを確認

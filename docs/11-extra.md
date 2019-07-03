@@ -1,5 +1,7 @@
 # 時間が余ったら
 
+---
+
 * Secure Cluster (secure-port, secure-bind-address)
     * kube-apiserverへの通信をhttps化 & 認証の有効化
         * K8s Cluster 各Nodeから kube-apiserverへのhttps通信の有効化
@@ -19,17 +21,18 @@
     * Weave
     * etc. (https://kubernetes.io/docs/concepts/cluster-administration/networking/)
 
+---
+
 * coredns
     * kube-dns の代替
 * MetalLB
     * Service Resource の type LoadBalancer が使えるようになる
 * nginx-ingress
     * Ingress Resourceが使えるようになる
-* Helm
-* Istio ServiceMesh
+
+---
 
 * 外部 Persistent Volume の有効化
     * https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options
 * Dynamic Volume Provisioning
     * https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/
-* vitess, rook, storageos などの永続化ソリューション（Persistent Volume）

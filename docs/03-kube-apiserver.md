@@ -1,20 +1,22 @@
 # 1 号機の kube-apiserver を設定し、起動する。
 
-* 設定ファイルが /etc/kubernetes/kube-apiserver.conf に存在します。当ファイルにオプションを追記していき、kube-apiserverを起動してください。
-    * `systemctl restart kube-apiserver` で設定反映（プロセス再起動）
-    * `systemctl status kube-apiserver` を複数回実行しエラーがないことを確認
+## kubectl の設定
 
 * kubectlの設定
     * $HOME/.kube/config に kubectl 用の kubeconfig が生成される
 
 ```
+MASTER_ADDR=XXX
 kubectl config set-credentials my-user
-kubectl config set-cluster my-cluster --server=http://k8s01:8080
+kubectl config set-cluster my-cluster --server=http://$MASTER_ADDR:8080
 kubectl config set-context my-context --cluster=my-cluster --user=my-user
 kubectl config use-context my-context
 ```
 
-* 1 号機上で `kubectl get nodes` してエラーが無いことを確認します。(node はまだ作ってないので、出力は `Not found` 的なものになるはず)
+## kube-apiserverの設定
+
+* 設定ファイルは /etc/kubernetes/kube-apiserver.conf です。当ファイルにオプションを追記していき、kube-apiserverを起動してください。
+    * `systemctl restart kube-apiserver` で設定反映（プロセス再起動）
 
 * etcd v2 の場合は、--storage-backend=etcd2が必要
 
@@ -38,4 +40,10 @@ KUBE_OPTS=" \
     * https://kubernetes.io/docs/admin/admission-controllers/#how-do-i-turn-on-an-admission-controller
     * v1.10より、推奨機能はデフォルトで有効化されています。
         * https://kubernetes.io/docs/admin/admission-controllers/#is-there-a-recommended-set-of-admission-controllers-to-use
+
+## kube-apiserver の確認
+
+* 1 号機上で `kubectl get nodes` してエラーが無いことを確認します。
+    * node はまだ作ってないので、出力は `Not found` 的なものになるはず
+
 

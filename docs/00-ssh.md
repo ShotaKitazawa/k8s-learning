@@ -6,6 +6,7 @@
         * vCPU 1 core
         * Memory 3.75 GB
     * Network: 以下
+    * Kubernetes: v1.15.0
 ```
                     | floating IP *3 (GlobalAddr)
                 +---+---+
@@ -18,11 +19,14 @@
         |             |             |
         |.2           |.3           |.4
    +----*----+   +----*----+   +----*----+
-   |  k8s01  |   |  k8s02  |   |  k8s03  |
+   |         |   |         |   |         |
    |  Master |   |  Node   |   |  Node   |
    |  & Node |   |         |   |         |
    +---------+   +---------+   +---------+
+      1号機         2号機         3号機
 ```
+
+## ログイン
 
 * 以下のコマンドで対象のインスタンスへログインできます。
 
@@ -35,3 +39,19 @@ gcloud compute ssh $INSTANCE_NAME
 ```
 sudo su -
 ```
+
+## MEMO
+
+以降に使いそうなコマンドの列挙
+
+* systemdに管理されているサービスのログをすべて表示
+
+```
+journalctl -u $SERVICE_NAME --no-pager
+```
+
+* Podの強制削除
+```
+kubectl delete xxx --grace-period=0 --force
+```
+

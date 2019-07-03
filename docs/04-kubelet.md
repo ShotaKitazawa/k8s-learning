@@ -1,6 +1,9 @@
 # 1 号機の kubelet を設定し、起動する。
 
-* 設定ファイルは /etc/kubernetes/kubelet.conf です。 systectl restart kubelet で設定反映（プロセス再起動）できます。
+## kubeletの設定
+
+* 設定ファイルは /etc/kubernetes/kubelet.conf です。当ファイルにオプションを追記していき、kubeletを起動してください。
+    * `systemctl restart kubelet` で設定反映（プロセス再起動）
 
 * `systemctl status kubelet` を複数回実行して正常に起動していることを確認。また、1 号機上で `kubectl get nodes` してノードが登録されていることを確認。
 
@@ -22,12 +25,9 @@ KUBE_OPTS=" \
 * --cluster-dns は コンテナが使うクラスタデフォルトの DNS サーバの指定です。
     * とりあえず 8.8.8.8 等何でも良い
 
-* 動作確認
-    * この時点で、SA, Secret を手動作成の上でpod.spec.nodeNameに `$NODE_ADDRESS` を記述すれば、Podが配置されることを確認
-        * 当リポジトリ manifests/04-manifest.yaml を参照
-        * kube-controller-manager が居ないため、default ServiceAccount すら存在しない > 手動で SA, SAに紐づくsecret を作る必要がある
+## kubeletの確認
 
-* MEMO: Podの強制削除
-```
-kubectl delete xxx --grace-period=0 --force
-```
+* この時点で、SA, Secret を手動作成の上でpod.spec.nodeNameに `$NODE_ADDRESS` を記述すれば、Podが配置されることを確認
+    * 当リポジトリ manifests/04-manifest.yaml を参照
+    * kube-controller-manager が居ないため、default ServiceAccount すら存在しない > 手動で SA, SAに紐づくsecret を作る必要がある
+
