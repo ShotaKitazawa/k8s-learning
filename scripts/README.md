@@ -25,7 +25,17 @@ bash ./generate-inventory.sh
 * Ansible Playbook の実行
 
 ```
-ansible-playbook -i inventory site.yml --private-key=$HOME/.ssh/google_compute_engine
+ansible-playbook -i inventory site.yml --private-key=$HOME/.ssh/google_compute_engine \
+-e 'ansible_python_interpreter=/usr/bin/python3'
+```
+
+## 作成が完了したら..?
+
+docsディレクトリに移動し，k8s hardwayを進めていきます
+
+```
+cd ../docs
+cloudshell edit 00-ssh.md
 ```
 
 # Delete
