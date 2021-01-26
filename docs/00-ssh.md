@@ -31,7 +31,9 @@
 * 以下のコマンドで対象のインスタンスへログインできます。
 
 ```
-gcloud compute ssh $INSTANCE_NAME
+# 例: gcloud compute ssh --zone='asia-northeast1-a' k8s-learning-tarou-01
+
+gcloud compute ssh --zone='asia-northeast1-a' $INSTANCE_NAME
 ```
 
 * 今後の作業はrootユーザで行います。パスワード無しでrootユーザに昇格可能

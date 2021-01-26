@@ -17,6 +17,7 @@ kubectl config use-context my-context
 
 * 設定ファイルは /etc/kubernetes/kube-apiserver.conf です。当ファイルにオプションを追記していき、kube-apiserverを起動してください。
     * `systemctl restart kube-apiserver` で設定反映（プロセス再起動）
+    * Unit XXX not found. と表示された場合は `systemctl daemon-reload` してください
 
 * etcd v2 の場合は、--storage-backend=etcd2が必要
 
