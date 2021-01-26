@@ -7,7 +7,7 @@
 
 * 設定ファイルにてkube-scheduler のbind Address、kube-apiserverのurl指定、kubeconfigの指定をすれば動くはず
 
-* もしかしたら以下のコマンドが必要 (TODO: 原因究明)
+* Pod のデプロイ前に以下のコマンドが必要
 ```
 kubectl taint node $NODENAME node.kubernetes.io/not-ready:NoSchedule-
 ```
