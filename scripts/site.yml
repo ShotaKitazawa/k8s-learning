@@ -11,9 +11,11 @@
       when: set_hostname is changed
 
 - hosts: master
+  tags: master
   roles:
     - master
 
 - hosts: node
+  tags: node
   roles:
     - node

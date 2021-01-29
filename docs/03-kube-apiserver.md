@@ -25,26 +25,23 @@ kubectl config use-context my-context
 
 * 設定ファイルは以下みたいになるはず
     * コマンドラインにて `kube-apiserver --help 2>&1 | less`
-    * ブラウザにて https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/
+        * `--insecure-bind-address` コマンドは v1.10 より Deprecated ですが、今回は簡易クラスタを構築するため当オプションを利用します
 
 ```
 KUBE_OPTS=" \
 --v=1 \
---insecure-bind-address=XXX \
+--insecure-bind-address=0.0.0.0 \
 --etcd-servers=XXX \
 --storage-backend=etcd2（必要な人だけ） \
 --service-cluster-ip-range=XXX \
 "
 ```
 
-* Admission Controller は Kubernetes が提供する拡張機能のようなものです。 ココらへんに各機能の特徴が載っています
-    * https://kubernetes.io/docs/admin/admission-controllers/#how-do-i-turn-on-an-admission-controller
-    * v1.10より、推奨機能はデフォルトで有効化されています。
-        * https://kubernetes.io/docs/admin/admission-controllers/#is-there-a-recommended-set-of-admission-controllers-to-use
-
 ## kube-apiserver の確認
 
 * 1 号機上で `kubectl get nodes` してエラーが無いことを確認します。
     * node はまだ作ってないので、出力は `Not found` 的なものになるはず
 
+# 理解度チェックリスト
 
+- [ ] kube-apiserver に対してマニフェストファイルを適用するとその設定はどこに保存される？

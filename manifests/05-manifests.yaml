@@ -4,8 +4,6 @@ kind: ServiceAccount
 metadata:
   name: test
   namespace: default
-  selfLink: /api/v1/namespaces/default/serviceaccounts/test
-  uid: 721ab723-13bc-11e5-aec2-42010af0021e
 secrets:
 - name: test-secret
 ---

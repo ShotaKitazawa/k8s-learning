@@ -1,11 +1,28 @@
-# etcd を 1 号機にインストールする。
+# etcd を 1 号機にインストールする
 
-* etcd は v2/v3 2種類がある
-    * etcd v2 を使う場合には、kube-apiserver を起動する際に、--storage-backend=etcd2 のオプションが必要
+* etcd v3 を 1 号機にインストールする
+    * https://github.com/etcd-io/etcd
 
+* 参考: Systemd Unit file
+    * https://github.com/etcd-io/etcd/blob/master/contrib/systemd/etcd.service
 
-## Download
-```bash
-wget -q --show-progress --https-only --timestamping   "https://github.com/etcd-io/etcd/releases/download/v3.4.10/etcd-v3.4.10-linux-amd64.tar.gz"
 ```
+[Unit]
+Description=etcd key-value store
+Documentation=https://github.com/etcd-io/etcd
+After=network.target
 
+[Service]
+#User=etcd
+User=root
+Type=notify
+Environment=ETCD_DATA_DIR=/var/lib/etcd
+Environment=ETCD_NAME=%m
+ExecStart=/usr/bin/etcd
+Restart=always
+RestartSec=10s
+LimitNOFILE=40000
+
+[Install]
+WantedBy=multi-user.target
+```
